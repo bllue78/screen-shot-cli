@@ -18,8 +18,14 @@ if(!url){
     timeout: 3000000
   });
 
-  await page.screenshot({ path: `screenshot.png`, fullPage: true });
+  await page.setViewport({width:1920, height:1800});
+  
+  var stream = await page.screenshot({ fullPage: true });
+  
   await browser.close();
-})().catch((reason) => {
+  
+  console.log(Buffer.from(stream).toString('base64'));
+  
+  })().catch((reason) => {
   console.log(reason)
 });
